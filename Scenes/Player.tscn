@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2c60jak2kqkd"]
+[gd_scene load_steps=10 format=3 uid="uid://b2c60jak2kqkd"]
 
-[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_61niy"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_61niy"]
 [ext_resource type="Texture2D" uid="uid://b5oihs4wgyw3r" path="res://Art/knight.png" id="1_k8w3h"]
+[ext_resource type="PackedScene" uid="uid://ctj1plq0t0k52" path="res://Scenes/Gun.tscn" id="3_3glf4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtuin"]
 atlas = ExtResource("1_k8w3h")
@@ -55,3 +56,6 @@ frame_progress = 0.603719
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_33ona")
+
+[node name="Gun" parent="." instance=ExtResource("3_3glf4")]
+position = Vector2(0, -5)

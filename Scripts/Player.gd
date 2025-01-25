@@ -18,8 +18,12 @@ func _physics_process(delta: float) -> void:
 	# TODO: For player movement, direction-switching must always be
 	# enabled, even when the player's locking their movement for aiming
 	var direction := Input.get_axis("Left", "Right")
+	if (direction != 0): 
+		transform.x.x = direction
+	
 	if direction:
 		velocity.x = direction * SPEED
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 

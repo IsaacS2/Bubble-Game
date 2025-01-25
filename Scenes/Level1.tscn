@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://v2swwb00rutm"]
+[gd_scene load_steps=6 format=4 uid="uid://v2swwb00rutm"]
 
 [ext_resource type="Texture2D" uid="uid://bel6qruigj08r" path="res://Art/world_tileset.png" id="1_kkj2f"]
 [ext_resource type="PackedScene" uid="uid://b2c60jak2kqkd" path="res://Scenes/Player.tscn" id="2_ofnlk"]
+[ext_resource type="PackedScene" uid="uid://bq326u2mu8y5g" path="res://Scenes/Bullet.tscn" id="3_yom2j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymr3r"]
 texture = ExtResource("1_kkj2f")
@@ -153,3 +154,18 @@ tile_set = SubResource("TileSet_4qoc3")
 position = Vector2(8, 15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bullet" parent="." instance=ExtResource("3_yom2j")]
+position = Vector2(94, -63)
+
+[node name="Bullet2" parent="." instance=ExtResource("3_yom2j")]
+position = Vector2(55, -91)
+rotation = -1.5708
+
+[node name="Bullet3" parent="." instance=ExtResource("3_yom2j")]
+position = Vector2(18, -61)
+rotation = -3.14159
+
+[node name="Bullet4" parent="." instance=ExtResource("3_yom2j")]
+position = Vector2(57, -31)
+rotation = -4.71239
