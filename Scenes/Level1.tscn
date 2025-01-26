@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://v2swwb00rutm"]
+[gd_scene load_steps=10 format=4 uid="uid://v2swwb00rutm"]
 
 [ext_resource type="Texture2D" uid="uid://bel6qruigj08r" path="res://Art/world_tileset.png" id="1_kkj2f"]
 [ext_resource type="PackedScene" uid="uid://b2c60jak2kqkd" path="res://Scenes/Player.tscn" id="2_ofnlk"]
@@ -146,6 +146,9 @@ texture = ExtResource("1_kkj2f")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ymr3r")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jae5c"]
+size = Vector2(20, 298)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b367n"]
 size = Vector2(1078, 100)
 
@@ -160,6 +163,18 @@ position = Vector2(8, 15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_16unr")
+
+[node name="StaticBodyLeft" type="StaticBody2D" parent="Camera2D"]
+position = Vector2(-265, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/StaticBodyLeft"]
+shape = SubResource("RectangleShape2D_jae5c")
+
+[node name="StaticBodyRight" type="StaticBody2D" parent="Camera2D"]
+position = Vector2(265, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/StaticBodyRight"]
+shape = SubResource("RectangleShape2D_jae5c")
 
 [node name="Enemy" parent="." instance=ExtResource("5_lh2t0")]
 position = Vector2(81, 16)
