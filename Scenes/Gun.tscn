@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctj1plq0t0k52"]
 
 [ext_resource type="Script" path="res://Scripts/Gun.gd" id="1_128uk"]
-[ext_resource type="Texture2D" uid="uid://d2qikknd54nfw" path="res://Art/fruit.png" id="2_pvcjq"]
+[ext_resource type="Texture2D" uid="uid://xpdj487348cn" path="res://Art/Gun.png" id="2_5xqno"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o5e1l"]
-atlas = ExtResource("2_pvcjq")
-region = Rect2(32, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf1v1"]
+atlas = ExtResource("2_5xqno")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_63d7o"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o5e1l")
+"texture": SubResource("AtlasTexture_wf1v1")
 }],
 "loop": true,
 "name": &"idle",
@@ -22,5 +22,6 @@ animations = [{
 script = ExtResource("1_128uk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -3)
 sprite_frames = SubResource("SpriteFrames_63d7o")
 animation = &"idle"

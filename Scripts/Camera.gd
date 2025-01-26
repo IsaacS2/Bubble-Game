@@ -11,7 +11,7 @@ var trackMode = Globals.Tracking.horizontal
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	position.y = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -28,7 +28,11 @@ func _process(delta: float) -> void:
 
 func _alter_tracking(newTrackMode : Globals.Tracking):
 	trackMode = newTrackMode
-
+	
+	if (trackMode == Globals.Tracking.horizontal):
+		position.y = 0
+	elif (trackMode == Globals.Tracking.vertical):
+		position.x = player.position.x
 
 func _player_death():
 	death = true
