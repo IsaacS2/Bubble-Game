@@ -164,7 +164,7 @@ tile_set = SubResource("TileSet_4qoc3")
 
 [node name="Player" parent="." instance=ExtResource("2_ofnlk")]
 unique_name_in_owner = true
-position = Vector2(8, 15)
+position = Vector2(8, 17)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_16unr")

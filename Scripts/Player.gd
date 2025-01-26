@@ -2,6 +2,9 @@ class_name Player
 
 extends CharacterBody2D
 
+signal checkpoint_reached
+
+@onready var Collider: CollisionShape2D = $CollisionShape2D
 @onready var Sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var Camera: PlayerCamera = $"../Camera2D"
 @onready var Gun: Node2D = $Gun
@@ -19,9 +22,15 @@ var health : int = MAXHEALTH
 var status : Globals.State = Globals.State.shooting
 var hit_stun : bool = false
 var hit_stun_time : float = 0
+var collider_original_position : Vector2
+
+
+func _ready() -> void:
+	collider_original_position = Collider.position
 
 
 func _process(delta: float) -> void:
+	
 	if (hit_stun_time > 0):
 		hit_stun_time -= delta
 		
@@ -100,6 +109,7 @@ func _hit(damage: int) -> void:
 		else: # touched obstacle to get freed
 			health = MAXHEALTH
 			status = Globals.State.shooting
+			Collider.position = collider_original_position
 			Gun._activate_gun(true)
 
 
@@ -108,7 +118,13 @@ func _add_bullet():
 
 
 func activate_bubble(): 
+	Collider.position = Sprite.position
 	status = Globals.State.bubbled
 	transform.x.x = 1
 	Camera._alter_tracking(Globals.Tracking.vertical)
 	Gun._activate_gun(false)
+
+
+func checkpoint_contact(location : Vector2):
+	emit_signal("checkpoint_reached", location)
+	
