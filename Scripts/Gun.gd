@@ -6,6 +6,7 @@ const MAXBULLETCOUNT = 5
 const ROTATIONDIFFERENCE = 15
 
 var gun_rotation
+var active : bool = true
 var gun_shot : bool = false
 var bullet_count : int = 5
 
@@ -28,7 +29,7 @@ func _process(delta: float) -> void:
 		
 	gun_shot = Input.is_action_just_pressed("Shoot")
 	
-	if (gun_shot): 
+	if ((gun_shot ) && active): 
 		for i in bullet_count + 1:
 			var new_bullet = bullet.instantiate()
 			var rotation_coeff = i % 2
@@ -47,3 +48,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	rotation_degrees = gun_rotation
+
+
+func _activate_gun(active_state : bool):
+	active = active_state

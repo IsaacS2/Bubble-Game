@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var Sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var Camera: PlayerCamera = $"../Camera2D"
+@onready var Gun: Node2D = $Gun
 
 const MAXHEALTH = 3
 const SPEED = 6000.0
@@ -76,24 +77,18 @@ func _physics_process(delta: float) -> void:
 
 func _hit(damage: int) -> void:
 	if (damage == MAXHEALTH && status != Globals.State.dead): # out-of-bounds
-		status = Globals.State.bubbled
-		transform.x.x = 1
-		Camera._alter_tracking(Globals.Tracking.vertical)
-	
+		activate_bubble()
 	
 	elif (status == Globals.State.shooting && !hit_stun): # hit by obstacle
 		health -= damage
 		
 		if (health < 1): # bubble time
-			status = Globals.State.bubbled
-			transform.x.x = 1
-			Camera._alter_tracking(Globals.Tracking.vertical)
+			activate_bubble()
 		else: # still shooting
 			hit_stun = true
 			hit_stun_time = MAXHITSTUNTIME
 			Sprite.modulate = HITCOLOR
 			Camera._alter_tracking(Globals.Tracking.horizontal)
-	
 	
 	elif (status == Globals.State.bubbled): # hit in bubble
 		if (damage > MAXHEALTH): # massive damage from sun
@@ -104,3 +99,10 @@ func _hit(damage: int) -> void:
 		else: # touched obstacle to get freed
 			health = MAXHEALTH
 			status = Globals.State.shooting
+			Gun._activate_gun(true)
+
+func activate_bubble(): 
+	status = Globals.State.bubbled
+	transform.x.x = 1
+	Camera._alter_tracking(Globals.Tracking.vertical)
+	Gun._activate_gun(false)
