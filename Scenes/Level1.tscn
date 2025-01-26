@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://v2swwb00rutm"]
+[gd_scene load_steps=9 format=4 uid="uid://v2swwb00rutm"]
 
 [ext_resource type="Texture2D" uid="uid://bel6qruigj08r" path="res://Art/world_tileset.png" id="1_kkj2f"]
 [ext_resource type="PackedScene" uid="uid://b2c60jak2kqkd" path="res://Scenes/Player.tscn" id="2_ofnlk"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_16unr"]
-[ext_resource type="PackedScene" uid="uid://bq326u2mu8y5g" path="res://Scenes/Bullet.tscn" id="3_yom2j"]
 [ext_resource type="PackedScene" uid="uid://47jbael5qrb5" path="res://Scenes/Enemy.tscn" id="5_lh2t0"]
+[ext_resource type="PackedScene" uid="uid://cxbgl18yck5sw" path="res://Scenes/Killzone.tscn" id="6_p1km8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymr3r"]
 texture = ExtResource("1_kkj2f")
@@ -146,6 +146,9 @@ texture = ExtResource("1_kkj2f")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ymr3r")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b367n"]
+size = Vector2(1078, 100)
+
 [node name="Level1" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -158,20 +161,19 @@ position = Vector2(8, 15)
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_16unr")
 
-[node name="Bullet" parent="." instance=ExtResource("3_yom2j")]
-position = Vector2(94, -63)
-
-[node name="Bullet2" parent="." instance=ExtResource("3_yom2j")]
-position = Vector2(55, -91)
-rotation = -1.5708
-
-[node name="Bullet3" parent="." instance=ExtResource("3_yom2j")]
-position = Vector2(18, -61)
-rotation = -3.14159
-
-[node name="Bullet4" parent="." instance=ExtResource("3_yom2j")]
-position = Vector2(57, -31)
-rotation = -4.71239
-
 [node name="Enemy" parent="." instance=ExtResource("5_lh2t0")]
 position = Vector2(81, 16)
+
+[node name="Killzone2" parent="." instance=ExtResource("6_p1km8")]
+position = Vector2(0, -300)
+damage = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone2"]
+shape = SubResource("RectangleShape2D_b367n")
+
+[node name="Killzone" parent="." instance=ExtResource("6_p1km8")]
+position = Vector2(0, 150)
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("RectangleShape2D_b367n")

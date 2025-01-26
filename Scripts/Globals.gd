@@ -4,4 +4,4 @@ extends Node
 
 enum State {shooting, bubbled, dead}
 
-enum Tracking {vertical, horizontal}
+enum Tracking {vertical, horizontal, still}

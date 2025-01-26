@@ -1,7 +1,9 @@
+class_name Bullet
+
 extends RigidBody2D
 
 var timeLeft
-@export var time : float = 2
+@export var time : float = 1.5
 @export var speed : float = 1
 
 var thrust = Vector2(0, -250)
@@ -12,9 +14,11 @@ func _ready() -> void:
 	pass
 	#add_constant_central_force(force: Vector2)
 
+
 func _integrate_forces(state):
 	pass
 	#state.add_constant_force(thrust.rotated(rotation + deg_to_rad(90)) * speed)
+
 
 func _process(delta: float) -> void:
 	timeLeft -= delta

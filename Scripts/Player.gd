@@ -8,10 +8,11 @@ extends CharacterBody2D
 const MAXHEALTH = 3
 const SPEED = 6000.0
 const JUMP_VELOCITY = -300.0
-const MAXACCELERATION = 100
-const MAXBUBBLESPEED = 500.0
+const BUBBLELIFTSPEED = 3
+const MAXACCELERATION = 200
+const MAXBUBBLESPEED = 400.0
 const MAXHITSTUNTIME = 1
-const HITCOLOR = Color.RED 
+const HITCOLOR = Color.RED
 
 var health : int = MAXHEALTH
 var status : Globals.State = Globals.State.shooting
@@ -33,11 +34,11 @@ func _physics_process(delta: float) -> void:
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
-
+		
 		# Handle jump.
 		if Input.is_action_just_pressed("Jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-
+		
 		# Get the input direction and handle the movement/deceleration.
 		# TODO: For player movement, direction-switching must always be
 		# enabled, even when the player's locking their movement for aiming
@@ -62,26 +63,44 @@ func _physics_process(delta: float) -> void:
 		direction *= MAXBUBBLESPEED
 		
 		velocity.x = move_toward(velocity.x, direction.x, maxFrameAcceleration)
-		velocity.y= -(get_gravity() * delta).y
+		velocity.y= -(get_gravity() * delta * BUBBLELIFTSPEED).y
+		
+		move_and_slide()
+		
+	elif (status == Globals.State.dead):
+		print("deadest")
+		velocity += get_gravity() * delta
 		
 		move_and_slide()
 
 
 func _hit(damage: int) -> void:
-	if (status == Globals.State.shooting && !hit_stun):
+	if (damage == MAXHEALTH && status != Globals.State.dead): # out-of-bounds
+		status = Globals.State.bubbled
+		transform.x.x = 1
+		Camera._alter_tracking(Globals.Tracking.vertical)
+	
+	
+	elif (status == Globals.State.shooting && !hit_stun): # hit by obstacle
 		health -= damage
 		
-		if (health < 1):
+		if (health < 1): # bubble time
 			status = Globals.State.bubbled
+			transform.x.x = 1
 			Camera._alter_tracking(Globals.Tracking.vertical)
-		else:
+		else: # still shooting
 			hit_stun = true
 			hit_stun_time = MAXHITSTUNTIME
 			Sprite.modulate = HITCOLOR
 			Camera._alter_tracking(Globals.Tracking.horizontal)
-			
-	elif (status == Globals.State.bubbled):
-		if (health < -MAXHEALTH):
+	
+	
+	elif (status == Globals.State.bubbled): # hit in bubble
+		if (damage > MAXHEALTH): # massive damage from sun
+			print("dead")
 			status = Globals.State.dead
-		else:
+			Camera._alter_tracking(Globals.Tracking.still)
+			collision_mask = 0
+		else: # touched obstacle to get freed
+			health = MAXHEALTH
 			status = Globals.State.shooting

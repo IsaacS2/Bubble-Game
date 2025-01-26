@@ -1,8 +1,13 @@
 extends Node2D
 
-@export var bullet : PackedScene = load("res://Scenes/Bullet.tscn")
+@export var bullet : PackedScene = load("res://Scenes/PlayerBullet.tscn")
+
+const MAXBULLETCOUNT = 5
+const ROTATIONDIFFERENCE = 15
+
 var gun_rotation
 var gun_shot : bool = false
+var bullet_count : int = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,21 +29,20 @@ func _process(delta: float) -> void:
 	gun_shot = Input.is_action_just_pressed("Shoot")
 	
 	if (gun_shot): 
-		var new_bullet = bullet.instantiate()
-		
-		#if (get_parent().transform.x.x > -0.99):
-			#new_bullet.rotation = rotation
-		#else:
-			#new_bullet.rotation = 3
-		new_bullet.rotation = global_rotation
-		
-		get_tree().root.add_child(new_bullet)
-		new_bullet.global_position = global_position
-		print(str(rotation))
-		print(str(transform.x.x))
-		print(str(scale.x))
-		print(str(scale.y))
+		for i in bullet_count + 1:
+			var new_bullet = bullet.instantiate()
+			var rotation_coeff = i % 2
+			#if (get_parent().transform.x.x > -0.99):
+				#new_bullet.rotation = rotation
+			#else:
+				#new_bullet.rotation = 3
+			if (rotation_coeff == 0):
+				new_bullet.rotation = global_rotation + deg_to_rad(ROTATIONDIFFERENCE * floor(i / 2))
+			else:
+				new_bullet.rotation = global_rotation + deg_to_rad(-ROTATIONDIFFERENCE * floor(i / 2))
 			
+			get_tree().root.add_child(new_bullet)
+			new_bullet.global_position = global_position
 
 
 func _physics_process(delta: float) -> void:
