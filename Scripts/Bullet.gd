@@ -15,11 +15,6 @@ func _ready() -> void:
 	#add_constant_central_force(force: Vector2)
 
 
-func _integrate_forces(state):
-	pass
-	#state.add_constant_force(thrust.rotated(rotation + deg_to_rad(90)) * speed)
-
-
 func _process(delta: float) -> void:
 	timeLeft -= delta
 	if (timeLeft <= 0):

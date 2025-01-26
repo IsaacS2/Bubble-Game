@@ -95,6 +95,8 @@ func _hit(damage: int) -> void:
 			status = Globals.State.dead
 			Camera._alter_tracking(Globals.Tracking.still)
 			collision_mask = 0
+			Camera._player_death()
+		
 		else: # touched obstacle to get freed
 			health = MAXHEALTH
 			status = Globals.State.shooting
