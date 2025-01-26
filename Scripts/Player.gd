@@ -69,7 +69,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 	elif (status == Globals.State.dead):
-		print("deadest")
 		velocity += get_gravity() * delta
 		
 		move_and_slide()
@@ -100,6 +99,11 @@ func _hit(damage: int) -> void:
 			health = MAXHEALTH
 			status = Globals.State.shooting
 			Gun._activate_gun(true)
+
+
+func _add_bullet():
+	Gun._add_bullet()
+
 
 func activate_bubble(): 
 	status = Globals.State.bubbled

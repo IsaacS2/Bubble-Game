@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://v2swwb00rutm"]
+[gd_scene load_steps=11 format=4 uid="uid://v2swwb00rutm"]
 
 [ext_resource type="Texture2D" uid="uid://bel6qruigj08r" path="res://Art/world_tileset.png" id="1_kkj2f"]
 [ext_resource type="PackedScene" uid="uid://b2c60jak2kqkd" path="res://Scenes/Player.tscn" id="2_ofnlk"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_16unr"]
+[ext_resource type="PackedScene" uid="uid://movil53hbciv" path="res://Scenes/Pickup.tscn" id="4_dk0bh"]
 [ext_resource type="PackedScene" uid="uid://47jbael5qrb5" path="res://Scenes/Enemy.tscn" id="5_lh2t0"]
 [ext_resource type="PackedScene" uid="uid://cxbgl18yck5sw" path="res://Scenes/Killzone.tscn" id="6_p1km8"]
 
@@ -175,6 +176,27 @@ position = Vector2(265, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/StaticBodyRight"]
 shape = SubResource("RectangleShape2D_jae5c")
+
+[node name="Pickup" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(145, -8)
+
+[node name="Pickup2" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(167, -8)
+
+[node name="Pickup3" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(189, -8)
+
+[node name="Pickup4" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(211, -8)
+
+[node name="Pickup5" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(-100, 21)
+
+[node name="Pickup6" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(-79, 21)
+
+[node name="Pickup7" parent="." instance=ExtResource("4_dk0bh")]
+position = Vector2(-57, 21)
 
 [node name="Enemy" parent="." instance=ExtResource("5_lh2t0")]
 position = Vector2(81, 16)

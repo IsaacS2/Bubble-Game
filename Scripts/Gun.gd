@@ -8,7 +8,7 @@ const ROTATIONDIFFERENCE = 15
 var gun_rotation
 var active : bool = true
 var gun_shot : bool = false
-var bullet_count : int = 5
+var bullet_count : int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,3 +52,7 @@ func _physics_process(delta: float) -> void:
 
 func _activate_gun(active_state : bool):
 	active = active_state
+
+
+func _add_bullet():
+	bullet_count = min(bullet_count + 1, MAXBULLETCOUNT)
