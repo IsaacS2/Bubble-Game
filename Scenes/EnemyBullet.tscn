@@ -1,29 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://00lujc7syn41"]
+[gd_scene load_steps=8 format=3 uid="uid://00lujc7syn41"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyBullet.gd" id="1_2q1hj"]
-[ext_resource type="Texture2D" uid="uid://buxt2rt03hhu" path="res://Art/coin.png" id="2_llhkh"]
+[ext_resource type="Texture2D" uid="uid://c6kl5pgiateph" path="res://Art/Bubble.png" id="2_2spop"]
+[ext_resource type="PackedScene" uid="uid://cxbgl18yck5sw" path="res://Scenes/Killzone.tscn" id="3_36f2o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0d3v"]
-size = Vector2(10, 10)
+size = Vector2(14, 14)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_356uv"]
-atlas = ExtResource("2_llhkh")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnpjh"]
+atlas = ExtResource("2_2spop")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nw55h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_356uv")
+"texture": SubResource("AtlasTexture_rnpjh")
 }],
 "loop": true,
 "name": &"default",
 "speed": 0.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njv5a"]
+size = Vector2(16, 16)
+
 [node name="EnemyBullet" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.0
 script = ExtResource("1_2q1hj")
 
@@ -31,6 +35,12 @@ script = ExtResource("1_2q1hj")
 shape = SubResource("RectangleShape2D_n0d3v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.236996, 0.454884, 0, 1)
 sprite_frames = SubResource("SpriteFrames_nw55h")
+
+[node name="Killzone" parent="." instance=ExtResource("3_36f2o")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("RectangleShape2D_njv5a")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

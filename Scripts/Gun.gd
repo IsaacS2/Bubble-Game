@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 			else:
 				new_bullet.rotation = global_rotation + deg_to_rad(-ROTATIONDIFFERENCE * floor(i / 2))
 			
-			get_tree().root.add_child(new_bullet)
+			get_tree().root.get_child(-1).get_child(-1).add_child(new_bullet)
 			new_bullet.global_position = global_position
 
 

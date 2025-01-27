@@ -11,7 +11,7 @@ signal checkpoint_reached
 
 const MAXHEALTH = 3
 const SPEED = 6000.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -400.0
 const BUBBLELIFTSPEED = 3
 const MAXACCELERATION = 200
 const MAXBUBBLESPEED = 400.0
@@ -100,17 +100,20 @@ func _hit(damage: int) -> void:
 	
 	elif (status == Globals.State.bubbled): # hit in bubble
 		if (damage > MAXHEALTH): # massive damage from sun
-			print("dead")
 			status = Globals.State.dead
 			Camera._alter_tracking(Globals.Tracking.still)
 			collision_mask = 0
+			Sprite.animation = "Dead"
 			Camera._player_death()
 		
 		else: # touched obstacle to get freed
 			health = MAXHEALTH
 			status = Globals.State.shooting
 			Collider.position = collider_original_position
+			Sprite.animation = "Idle"
 			Gun._activate_gun(true)
+			Gun.visible = true
+			Camera._alter_tracking(Globals.Tracking.horizontal)
 
 
 func _add_bullet():
@@ -118,11 +121,13 @@ func _add_bullet():
 
 
 func activate_bubble(): 
+	Sprite.animation = "Bubble"
 	Collider.position = Sprite.position
 	status = Globals.State.bubbled
 	transform.x.x = 1
 	Camera._alter_tracking(Globals.Tracking.vertical)
 	Gun._activate_gun(false)
+	Gun.visible = false
 
 
 func checkpoint_contact(location : Vector2):

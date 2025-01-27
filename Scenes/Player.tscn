@@ -1,8 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2c60jak2kqkd"]
+[gd_scene load_steps=11 format=3 uid="uid://b2c60jak2kqkd"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_61niy"]
 [ext_resource type="Texture2D" uid="uid://f0rn6qy26knm" path="res://Art/Bubble_Player.png" id="2_cmlyi"]
+[ext_resource type="Texture2D" uid="uid://bmj062fmin6v7" path="res://Art/Bubble_Player_Bubbled.png" id="2_wir6q"]
 [ext_resource type="PackedScene" uid="uid://ctj1plq0t0k52" path="res://Scenes/Gun.tscn" id="3_3glf4"]
+[ext_resource type="Texture2D" uid="uid://dkrv5ew5u253k" path="res://Art/Bubble_Player_Fire.png" id="3_pltpj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5fup"]
+atlas = ExtResource("2_wir6q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knhau"]
+atlas = ExtResource("3_pltpj")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8g441"]
 atlas = ExtResource("2_cmlyi")
@@ -10,6 +20,22 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xckd0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5fup")
+}],
+"loop": true,
+"name": &"Bubble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knhau")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8g441")
@@ -30,7 +56,6 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_xckd0")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.120329
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)

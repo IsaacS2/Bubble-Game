@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cta4h0wb6fgn5"]
+
+[ext_resource type="PackedScene" uid="uid://cxbgl18yck5sw" path="res://Scenes/Killzone.tscn" id="1_s8ui4"]
+[ext_resource type="Texture2D" uid="uid://ckvbb0ddbsvpb" path="res://Art/Bubble_Spike.png" id="2_qmxp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfe86"]
+size = Vector2(64, 64)
+
+[node name="Spike" instance=ExtResource("1_s8ui4")]
+z_index = 4
+
+[node name="BubbleSpike" type="Sprite2D" parent="." index="0"]
+modulate = Color(0.32549, 1, 1, 1)
+texture = ExtResource("2_qmxp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+visible = false
+shape = SubResource("RectangleShape2D_gfe86")

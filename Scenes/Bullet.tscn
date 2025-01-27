@@ -1,20 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://bq326u2mu8y5g"]
 
 [ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_1jvuq"]
-[ext_resource type="Texture2D" uid="uid://buxt2rt03hhu" path="res://Art/coin.png" id="2_2rff1"]
+[ext_resource type="Texture2D" uid="uid://c6kl5pgiateph" path="res://Art/Bubble.png" id="2_bnux0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l03wl"]
-size = Vector2(10, 10)
+size = Vector2(16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_356uv"]
-atlas = ExtResource("2_2rff1")
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvo51"]
+atlas = ExtResource("2_bnux0")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_31s7r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_356uv")
+"texture": SubResource("AtlasTexture_yvo51")
 }],
 "loop": true,
 "name": &"default",
